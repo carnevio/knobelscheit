@@ -1,9 +1,23 @@
 import { Knobelscheit  } from "./knobelscheit.ts";
 import { rollTwoDice } from "./dice.ts";
+import { debug } from "node:console";
 
-function tryInt(value:string): number[] {
+function parseSelection(input: string) {
+    const trimmed = input.trim() // assumes value is already not null and fixes any values left and right extra
+    if (trimmed.length === 0) {return null}
+    const parts = trimmed.split(',')
+    const numbers: number [] = []
+    for (const part of parts) {
+        if (['0','1','2','3','4','5','6','7', '8', '9'].includes(part)) { 
+            numbers.push(Number.parseInt(part))
+        }
+    }
+    return numbers
+}
+/*
+function parseSelection(value:string): number[] | null {
     try {
-        if (value === '') {return []}
+        if (value === '') {return null}
         const values = value.split(',')
         let numList: number[] = [];
         for (let i = 0; i < values.length; i++) {
@@ -12,29 +26,41 @@ function tryInt(value:string): number[] {
         }
         return numList
     } catch {
-        return [] // return 0 since 0 is not in the valid range
+        return null // return 0 since 0 is not in the valid range
     }
 }
+*/
 function main() {
     console.log('Welcome to the Knobelscheit game!');
 
     const game = new Knobelscheit();
-
     while (!game.gameOver()) {
         console.log(`Remaining numbers: ${game.remainingNumbers().join(',')}`)
         // roll the dices
-        const result = rollTwoDice()
-        console.log(`Rolled: ${result.one} + ${result.two} = ${result.sum}`);
-        game.flip([result.one, result.two], result.sum)
-        let userInput: string = ''
-        while (!game.flip(tryInt(userInput), result.sum)) {
-            console.log('Invalid Input! please choose one or more numbers that are equal to the sum')
-            userInput = prompt('Your Choice(s f.e. `3,1` for 4`') || ''
+        const {one, two, sum} = rollTwoDice()
 
+        console.log(`Rolled: ${one} + ${two} = ${sum}`);
+        debug(game.flip([one, two], sum))
+        while (true) {
+            const input = prompt('Which Numbers do you want to flip:')
+            if (input === null || input === '') {
+                return // redo action
+            }
+            debug(parseSelection(input))
+            const parsedSelection = parseSelection(input)
+            if (parsedSelection === null) {
+                return; // redo action
+            }
+            const flip = game.flip(parsedSelection, sum)
+            debug(flip)
+            debug(sum)
+            if (flip) {
+                break;
+            }
+             
+            
         }
-        let userInputArray = userInput.split(',')
-        // is flippable
-        game.flip([])
+        
 
         
         

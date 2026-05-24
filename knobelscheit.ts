@@ -25,14 +25,18 @@ export class Knobelscheit  {
         }
     }
     flip (nums: number[], sum: number): boolean {
-        // debug(`Is Equal to value: ${(nums[0] + nums[1] == sum)}`);
-        //  debug(`Is good length ${(nums.length == 2)}`);
-        //  debug(`Is flippable ${this.canFlip(sum)}`);
-        //  debug(`Is in range (0) ${(nums[0] > 0 && nums[0] < 7)}`);
-        //  debug(`Is in range (1) ${(nums[1] > 0 && nums[1] < 7)}`);
+        debug(`Is Equal to value: ${(nums[0] + nums[1] == sum)}`);
+        debug(`Is good length ${(nums.length > 0)}`);
+        debug(`already flipped: ${this.alreadyFlippedNumbers()}`);
+        debug(`remaining: ${this.remainingNumbers()}`)
+        debug(`Is flippable ${this.canFlip(sum)}`);
+        debug(`Is more than zero (0) ${(nums[0] > 0)}`);
+        debug(`Is less than 7 (0) ${(nums[0] < 7)}`);
+        debug(`is more than zero (1) ${(nums[1] > 0)}`);
+        debug(`is less than 7 (1)${(nums[1] < 7)}`);
         if (
             (nums[0] + nums[1] != sum)  ||
-            (nums.length != 2)          || // rules out if no number is in the array
+            (nums.length == 0)          || // rules out if no number is in the array
             !this.canFlip(sum)          ||
             (nums[0] < 0) ||
             ( nums[0] > 7)||
