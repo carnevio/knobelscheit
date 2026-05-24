@@ -12,6 +12,6 @@ Deno.test(' Zahl zwischen 1-6 würfeln', () => {
 });
 
 Deno.test('2x Würfeln und Summe richtig auswerten', () => {
-    const result = rollTwoDice() // returns js object
+    const result = rollTwoDice([1,2,3,4,5,6,7,8,9]) // returns js object
     assertEquals(result.sum, (result.one + result.two))
 })
