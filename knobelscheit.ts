@@ -3,17 +3,19 @@ import { debug } from "node:console";
 export class Knobelscheit  {
     public remainingNumbersList: number[] = [1,2,3,4,5,6,7,8,9];
     public alreadyFlippedNumbersList: number[] = [];
-    public gameOverValue: boolean = false
     
 
-   remainingNumbers () {
+   remainingNumbers (): number[] {
         return this.remainingNumbersList
     }   
-    alreadyFlippedNumbers() { 
+    alreadyFlippedNumbers(): number[] { 
         return this.alreadyFlippedNumbersList
     }
-    gameOver () {
-        return this.gameOverValue
+    gameOver (): boolean { 
+
+       if (this.alreadyFlippedNumbers().length == 9 && this.remainingNumbers().length == 0) { return true}
+       return false
+        
     }
     canFlip (num: number): boolean {
         if (!this.alreadyFlippedNumbers().includes(num)) {
