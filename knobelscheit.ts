@@ -1,5 +1,4 @@
-import { debug, timeStamp } from "node:console";
-import { validateHeaderValue } from "node:http";
+
        
 export class Knobelscheit  {
     public remainingNumbersList: number[] = [1,2,3,4,5,6,7,8,9];

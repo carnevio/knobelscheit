@@ -1,6 +1,6 @@
 import { Knobelscheit  } from "./knobelscheit.ts";
 import { rollTwoDice } from "./dice.ts";
-import { Console, debug } from "node:console";
+
 
 function parseSelection(input: string) {
 
@@ -53,13 +53,11 @@ function main() {
         
         const {one, two, sum} = rollTwoDice(game.remainingNumbers())
         console.log(`Rolled: ${one} + ${two} = ${sum}`);
-        debug(game.flip([one, two], sum))
         console.log(buildBoard(game.remainingNumbers()));
         const input = prompt('Which Numbers do you want to flip:')
         if (input === null || input === '') {
             return // redo action
         }
-        debug(parseSelection(input))
         const parsedSelection = parseSelection(input)
         if (parsedSelection === null) {
             return; // redo action

@@ -14,8 +14,7 @@ Deno.test('Korekte Werte umflippen wenn die Summe passt', () => {
     const flips = game.flip([3, 6], 9);
     assertEquals(flips, true)
 
-    assertEquals(game.remainingNumbers(), [1, 2, 3, 4, 5, 6, 7, 8])
-    assertEquals(game.alreadyFlippedNumbers(), [9])
+    assertEquals(game.remainingNumbers(), [1, 2, 4, 5, 7, 8, 9])
 });
 
 Deno.test('Schon geflipte werte können nicht mehr geflipt werden', () => {
@@ -26,5 +25,5 @@ Deno.test('Schon geflipte werte können nicht mehr geflipt werden', () => {
 
 Deno.test('Invalide Werte', () => {
     const game = new Knobelscheit();
-    assert(!game.flip([1, 8],9));
+    assert(!game.flip([1, 7],9));
 });

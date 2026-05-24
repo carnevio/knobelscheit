@@ -1,5 +1,4 @@
-import { assertAlmostEquals, assertEquals, assert } from "@std/assert";
-import { formattedAddition } from "./demo.ts";
+import {  assertEquals, assert } from "@std/assert";
 import { rollDice, rollTwoDice } from './dice.ts'
 
 
