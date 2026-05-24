@@ -1,15 +1,18 @@
 import { Knobelscheit  } from "./knobelscheit.ts";
 import { rollTwoDice } from "./dice.ts";
 
-function tryInt(value:string): number {
+function tryInt(value:string): number[] {
     try {
-        let values = value.split(',')
-        for (let i; i < values.length) {
-            Number.parseInt(value)
+        if (value === '') {return []}
+        const values = value.split(',')
+        let numList: number[] = [];
+        for (let i = 0; i < values.length; i++) {
+            Number.parseInt(values[i])
+            numList.push(Number.parseInt(values[i]))
         }
-        return values
+        return numList
     } catch {
-        return 0 // return 0 since 0 is not in the valid range
+        return [] // return 0 since 0 is not in the valid range
     }
 }
 function main() {
@@ -24,9 +27,10 @@ function main() {
         console.log(`Rolled: ${result.one} + ${result.two} = ${result.sum}`);
         game.flip([result.one, result.two], result.sum)
         let userInput: string = ''
-        while (!game.canFlip(tryInt(userInput))) {
+        while (!game.flip(tryInt(userInput), result.sum)) {
             console.log('Invalid Input! please choose one or more numbers that are equal to the sum')
             userInput = prompt('Your Choice(s f.e. `3,1` for 4`') || ''
+
         }
         let userInputArray = userInput.split(',')
         // is flippable
